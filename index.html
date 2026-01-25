@@ -1,0 +1,220 @@
+// =============================
+// README.md
+// =============================
+// EduPlatform Frontend Template
+// Tech: React + Vite + Tailwind CSS
+// جاهز للبيع والتطوير
+// =============================
+
+/* خطوات التشغيل:
+1- npm install
+2- npm run dev
+*/
+
+// =============================
+// package.json
+// =============================
+{
+  "name": "edu-platform-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}
+
+// =============================
+// tailwind.config.js
+// =============================
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  theme: {
+    extend: {}
+  },
+  plugins: []
+}
+
+// =============================
+// postcss.config.js
+// =============================
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {}
+  }
+}
+
+// =============================
+// index.html
+// =============================
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduPlatform</title>
+  </head>
+  <body class="bg-gray-50">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+// =============================
+// src/main.jsx
+// =============================
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { BrowserRouter } from "react-router-dom"
+import App from "./App"
+import "./index.css"
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
+
+// =============================
+// src/index.css
+// =============================
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// =============================
+// src/App.jsx
+// =============================
+import { Routes, Route } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Home from "./pages/Home"
+import Courses from "./pages/Courses"
+import CourseDetails from "./pages/CourseDetails"
+import Dashboard from "./pages/Dashboard"
+import Login from "./pages/Login"
+
+export default function App() {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:id" element={<CourseDetails />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
+  )
+}
+
+// =============================
+// src/components/Navbar.jsx
+// =============================
+import { Link } from "react-router-dom"
+
+export default function Navbar() {
+  return (
+    <nav class="bg-white shadow px-6 py-4 flex justify-between">
+      <h1 class="text-xl font-bold text-blue-600">EduPlatform</h1>
+      <div class="space-x-4">
+        <Link to="/" class="hover:text-blue-600">Home</Link>
+        <Link to="/courses" class="hover:text-blue-600">Courses</Link>
+        <Link to="/dashboard" class="hover:text-blue-600">Dashboard</Link>
+        <Link to="/login" class="bg-blue-600 text-white px-4 py-2 rounded">Login</Link>
+      </div>
+    </nav>
+  )
+}
+
+// =============================
+// src/pages/Home.jsx
+// =============================
+export default function Home() {
+  return (
+    <section class="text-center py-20">
+      <h2 class="text-4xl font-bold mb-4">Learn Anytime, Anywhere</h2>
+      <p class="text-gray-600 mb-6">Professional online courses by top instructors</p>
+      <a href="/courses" class="bg-blue-600 text-white px-6 py-3 rounded">Browse Courses</a>
+    </section>
+  )
+}
+
+// =============================
+// src/pages/Courses.jsx
+// =============================
+const courses = [
+  { id: 1, title: "Web Development", instructor: "Ahmed Ali" },
+  { id: 2, title: "Data Science", instructor: "Sara Mohamed" }
+]
+
+export default function Courses() {
+  return (
+    <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      {courses.map(course => (
+        <div key={course.id} class="bg-white p-6 rounded shadow">
+          <h3 class="text-xl font-bold">{course.title}</h3>
+          <p class="text-gray-500">{course.instructor}</p>
+          <a href={`/courses/${course.id}`} class="text-blue-600">View Details</a>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// =============================
+// src/pages/CourseDetails.jsx
+// =============================
+import { useParams } from "react-router-dom"
+
+export default function CourseDetails() {
+  const { id } = useParams()
+  return (
+    <div class="p-8">
+      <h2 class="text-3xl font-bold">Course #{id}</h2>
+      <p class="text-gray-600 mt-4">Full course description goes here.</p>
+    </div>
+  )
+}
+
+// =============================
+// src/pages/Dashboard.jsx
+// =============================
+export default function Dashboard() {
+  return (
+    <div class="p-8">
+      <h2 class="text-2xl font-bold">Student Dashboard</h2>
+      <p class="text-gray-600">Your enrolled courses will appear here.</p>
+    </div>
+  )
+}
+
+// =============================
+// src/pages/Login.jsx
+// =============================
+export default function Login() {
+  return (
+    <div class="flex justify-center items-center h-screen">
+      <form class="bg-white p-8 shadow rounded w-96">
+        <h2 class="text-xl font-bold mb-4">Login</h2>
+        <input class="w-full border p-2 mb-3" placeholder="Email" />
+        <input class="w-full border p-2 mb-3" type="password" placeholder="Password" />
+        <button class="w-full bg-blue-600 text-white py-2 rounded">Login</button>
+      </form>
+    </div>
+  )
+}
