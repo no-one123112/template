@@ -1,282 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --bg: #ffffff;
+  --text: #222;
+}
 
-/* Reset and base styles */
+body.dark {
+  --bg: #121212;
+  --text: #f1f1f1;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cairo', sans-serif;
 }
 
 body {
-    font-family: 'Cairo', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    direction: rtl;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s;
 }
 
-/* Header and Navigation */
-header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    color: #333;
-    padding: 1rem 2rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+.container {
+  width: 90%;
+  margin: auto;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.header {
+  position: fixed;
+  width: 100%;
+  background: var(--bg);
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  z-index: 100;
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #667eea;
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
+.nav-links {
+  display: flex;
+  list-style: none;
 }
 
-nav ul li {
-    margin-left: 1rem;
-    margin-right: 0;
+.nav-links a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: var(--text);
 }
 
-nav ul li a {
-    color: #333;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s ease;
-    border-radius: 25px;
-}
-
-nav ul li a:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* Hero Section */
 .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8rem 2rem 4rem;
-    color: white;
-    min-height: 100vh;
-    position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  gap: 2rem;
 }
 
-.hero-content {
-    flex: 1;
-    max-width: 50%;
+.hero img {
+  max-width: 100%;
+  border-radius: 20px;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.section-title {
+  text-align: center;
+  margin: 4rem 0 2rem;
 }
 
-.hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 2rem;
 }
 
-#enroll-btn {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.card, .course-card {
+  background: var(--bg);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.1);
 }
 
-#enroll-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.hero-image {
-    flex: 1;
-    text-align: center;
-}
-
-.hero-image img {
-    max-width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* Features Section */
-.features {
-    padding: 4rem 2rem;
-    background: white;
-    text-align: center;
-}
-
-.features h2 {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #333;
-}
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-}
-
-.feature-card i {
-    font-size: 3rem;
-    color: #667eea;
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    margin-bottom: 1rem;
-}
-
-/* Courses Section */
-.courses {
-    padding: 4rem 2rem;
-    background: #f4f4f4;
-    text-align: center;
-}
-
-.courses h2 {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-}
-
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.course-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.course-card:hover {
-    transform: translateY(-10px);
-}
-
-.course-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.course-card h3 {
-    padding: 1rem;
-    font-size: 1.3rem;
-}
-
-.course-card p {
-    padding: 0 1rem;
-}
-
-.enroll-course {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    margin: 1rem;
-    cursor: pointer;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-}
-
-.enroll-course:hover {
-    transform: scale(1.05);
-}
-
-/* Testimonials Section */
-.testimonials {
-    padding: 4rem 2rem;
-    background: white;
-    text-align: center;
-}
-
-.testimonials h2 {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-}
-
-.testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.testimonial-card {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    font-style: italic;
-}
-
-.testimonial-card cite {
-    display: block;
-    margin-top: 1rem;
-    font-weight: bold;
-    color: #667eea;
-}
-
-/* Footer */
-footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 2rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 6rem 1rem 2rem;
-    }
-    .hero-content {
-        max-width: 100%;
-    }
-    nav ul {
-        flex-direction: column;
-        margin-top: 1rem;
-    }
-    .hero h1 {
-        font-size: 2.5rem;
-    }
+.btn-primary, .btn-secondary {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
 }
